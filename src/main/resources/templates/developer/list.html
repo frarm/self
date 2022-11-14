@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Core Online Tutorial - List developers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <style>
+        #developers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #developers td, #developers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #developers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #developers tr:hover {background-color: #ddd;}
+
+        #developers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(developers)}">
+        <h2>developer List</h2>
+        <table id="developers">
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Skills</th>
+            </tr>
+            <tr th:each="developer : ${developers}">
+                <td th:text="${developer.id}"></td>
+                <td th:text="${developer.firstName}"></td>
+                <td th:text="${developer.lastName}"></td>
+                <td th:text="${developer.email}"></td>
+                <td><a th:href="${'/developer/show/' + developer.id}">View</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/developer/new">New developer</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
